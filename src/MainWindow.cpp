@@ -7,6 +7,7 @@
 #include <QAction>
 #include "plugins/FFmpegPlugin/CalculateVmafWidget.h"
 #include "plugins/ffmpegplugin/FFmpegSettingsWidget.h"
+#include "plugins/FFmpegPlugin/GenerateMpegTsWidget.h"
 
 MainWindow::MainWindow(QWidget* parent)
 	: QMainWindow(parent)
@@ -39,6 +40,19 @@ void MainWindow::setupMenuBar() {
         }
     );
     ffmpegMenu->addAction(vmafAction);
+
+	QAction* mpegTsAction = new QAction("Generate MPEG-TS", this);
+	connect(mpegTsAction, &QAction::triggered, this, [=]() {
+		// Always create a new widget instance to allow multiple windows
+		GenerateMpegTsWidget* widget = new GenerateMpegTsWidget(this);
+		widget->setWindowFlag(Qt::Window);
+		widget->setAttribute(Qt::WA_DeleteOnClose);
+		widget->show();
+		widget->raise();
+		widget->activateWindow();
+		}
+	);
+	ffmpegMenu->addAction(mpegTsAction);
 
     QAction* ffmpegSettingsAction = new QAction("Settings", this);
     connect(ffmpegSettingsAction, &QAction::triggered, this, [=]() {

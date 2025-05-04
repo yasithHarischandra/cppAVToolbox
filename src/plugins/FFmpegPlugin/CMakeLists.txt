@@ -10,6 +10,8 @@ qt_add_library(FFmpegPlugin STATIC
     FFmpegSettingsWidget.h
     CalculateVmafWidget.cpp
     CalculateVmafWidget.h
+    GenerateMpegTsWidget.cpp
+    GenerateMpegTsWidget.h
     ${SETTINGS_UI_HDR}
 )
 
