@@ -12,6 +12,7 @@
 FFmpegSettingsWidget::FFmpegSettingsWidget(QWidget* parent)
     : QWidget(parent)
 {
+    setWindowTitle("FFMPEG Settings");
     auto* layout = new QHBoxLayout(this);
     layout->addWidget(new QLabel("ffmpeg path:"));
 
