@@ -129,8 +129,13 @@ void CalculateVmafWidget::onComputeVmaf() {
         });
 
     connect(_job, &ExternalToolJob::finished, this, [=](int code, QProcess::ExitStatus status) {
-        if (status == QProcess::NormalExit && code == 0) {
-            QFile jsonFile("vmaf_output.json");
+        if (status == QProcess::NormalExit && code == 0) 
+        {
+            QString distFile = _distLineEdit->text();
+            QFileInfo distInfo(distFile);
+            QString logPath = distInfo.absolutePath();
+
+            QFile jsonFile(logPath + "/vmaf_output.json");
             if (jsonFile.open(QIODevice::ReadOnly)) {
                 QString json = jsonFile.readAll();
                 jsonFile.close();
