@@ -8,6 +8,7 @@
 #include "plugins/FFmpegPlugin/CalculateVmafWidget.h"
 #include "plugins/ffmpegplugin/FFmpegSettingsWidget.h"
 #include "plugins/FFmpegPlugin/GenerateMpegTsWidget.h"
+#include "plugins/FFmpegPlugin/MediaInfoWidget.h"
 
 MainWindow::MainWindow(QWidget* parent)
 	: QMainWindow(parent)
@@ -53,6 +54,19 @@ void MainWindow::setupMenuBar() {
 		}
 	);
 	ffmpegMenu->addAction(mpegTsAction);
+
+	QAction* mediaInfoAction = new QAction("Media Info", this);
+	connect(mediaInfoAction, &QAction::triggered, this, [=]() {
+		// Always create a new widget instance to allow multiple windows
+		MediaInfoWidget* widget = new MediaInfoWidget(this);
+		widget->setWindowFlag(Qt::Window);
+		widget->setAttribute(Qt::WA_DeleteOnClose);
+		widget->show();
+		widget->raise();
+		widget->activateWindow();
+		}
+	);
+	ffmpegMenu->addAction(mediaInfoAction);	
 
     QAction* ffmpegSettingsAction = new QAction("Settings", this);
     connect(ffmpegSettingsAction, &QAction::triggered, this, [=]() {

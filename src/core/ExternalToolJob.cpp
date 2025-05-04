@@ -8,7 +8,9 @@ ExternalToolJob::ExternalToolJob(QObject* parent)
     _timeoutTimer->setSingleShot(true);
 
     connect(_process, &QProcess::readyReadStandardOutput, this, [=]() {
-        emit outputReceived(QString::fromLocal8Bit(_process->readAllStandardOutput()));
+        QByteArray chunk = _process->readAllStandardOutput();
+        _buffer += chunk;
+        emit outputReceived(QString::fromLocal8Bit(chunk));
         });
 
     connect(_process, &QProcess::readyReadStandardError, this, [=]() {

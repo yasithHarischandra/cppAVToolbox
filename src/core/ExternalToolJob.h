@@ -18,6 +18,9 @@ public:
     void start(const QString& program, const QStringList& arguments, const QString& workingDir = "", int timeoutMs = 0);
     void stop();
 
+    QByteArray readAllStandardOutput() const { return _buffer; }
+    //QByteArray readAllStandardError()  const { return _process->readAllStandardError(); }
+
 signals:
     void started();
     void finished(int exitCode, QProcess::ExitStatus exitStatus);
@@ -29,4 +32,5 @@ signals:
 private:
     QProcess* _process;
     QTimer* _timeoutTimer;
+    QByteArray _buffer;
 };
