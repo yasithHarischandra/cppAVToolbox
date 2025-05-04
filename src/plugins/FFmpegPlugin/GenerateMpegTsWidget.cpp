@@ -123,7 +123,7 @@ void GenerateMpegTsWidget::onStartStream() {
 
     _startButton->setEnabled(false);
     _stopButton->setEnabled(true);
-    _job->start(exe, args, 0);
+    _job->start(exe, args);
 }
 
 void GenerateMpegTsWidget::onStopStream() {
