@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget* parent)
 	auto* layout = new QVBoxLayout(central);
 	layout->addWidget(new QLabel("AVToolbox is Ready"));
 	setCentralWidget(central);
+    setMinimumSize(800, 600);
 	setWindowTitle("AVToolbox");
 }
 
