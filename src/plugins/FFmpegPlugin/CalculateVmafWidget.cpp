@@ -1,4 +1,4 @@
-#include "CalculateVmafWidget.h"
+ï»¿#include "CalculateVmafWidget.h"
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QFileDialog>
@@ -10,7 +10,7 @@
 CalculateVmafWidget::CalculateVmafWidget(QWidget* parent)
     : QWidget(parent)
 {
-    setMinimumSize(800, 600);
+    setMinimumSize(600, 400);
     setWindowTitle("Calculate VMAF");
 
     setupUI();
@@ -87,12 +87,12 @@ void CalculateVmafWidget::onComputeVmaf() {
     QFileInfo distInfo(distFile);
     // 1) build a forward?slash path
     QString logPath = distInfo.absolutePath().replace('\\', '/');
-    // logPath == "F:/Yasith/Projects/…/vmaf_output.json"
+    // logPath == "F:/Yasith/Projects/â€¦/vmaf_output.json"
 
     // 2) escape the first colon
     QString escPath = logPath;
     escPath.replace(":/", "\\:/");
-    // escPath == "F\\:/Yasith/Projects/…/vmaf_output.json"
+    // escPath == "F\\:/Yasith/Projects/â€¦/vmaf_output.json"
 
     // 3) now build the filter
     QString filter = QString("libvmaf=log_path=%1:log_fmt=json").arg(escPath);
