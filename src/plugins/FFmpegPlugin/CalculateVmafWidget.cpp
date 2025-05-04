@@ -10,6 +10,9 @@
 CalculateVmafWidget::CalculateVmafWidget(QWidget* parent)
     : QWidget(parent)
 {
+    setMinimumSize(800, 600);
+    setWindowTitle("Calculate VMAF");
+
     setupUI();
 }
 
