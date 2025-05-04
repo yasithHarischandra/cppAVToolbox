@@ -5,6 +5,7 @@
 #include <QMenuBar>
 #include <QMenu>
 #include <QAction>
+#include "plugins/FFmpegPlugin/CalculateVmafWidget.h"
 
 MainWindow::MainWindow(QWidget* parent)
 	: QMainWindow(parent)
@@ -26,17 +27,16 @@ void MainWindow::setupMenuBar() {
 
     QAction* vmafAction = new QAction("Calculate VMAF", this);
     connect(vmafAction, &QAction::triggered, this, [=]() {
-        if (!_vmafWidget) {
-            _vmafWidget = new CalculateVmafWidget;
-            _vmafWidget->setAttribute(Qt::WA_DeleteOnClose);
-            connect(_vmafWidget, &QWidget::destroyed, this, [=]() {
-                _vmafWidget = nullptr;
-                });
+        // Always create a new widget instance to allow multiple windows
+        CalculateVmafWidget* widget = new CalculateVmafWidget(this);
+        widget->setWindowFlag(Qt::Window);
+        widget->setAttribute(Qt::WA_DeleteOnClose);
+        widget->show();
+        widget->raise();
+        widget->activateWindow();
         }
-        _vmafWidget->show();
-        _vmafWidget->raise();
-        _vmafWidget->activateWindow();
-        });
+    );
+    ffmpegMenu->addAction(vmafAction);
 
     ffmpegMenu->addAction(vmafAction);
 

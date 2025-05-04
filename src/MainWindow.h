@@ -1,7 +1,6 @@
 // src/MainWindow.h
 #pragma once
 #include <QMainWindow>
-#include "plugins/FFmpegPlugin/CalculateVmafWidget.h"
 
 class MainWindow : public QMainWindow {
 	Q_OBJECT
@@ -10,6 +9,4 @@ public:
 
 protected:
 	void setupMenuBar();
-
-	CalculateVmafWidget* _vmafWidget = nullptr;
 };
